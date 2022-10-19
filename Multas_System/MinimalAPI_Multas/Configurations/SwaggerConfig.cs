@@ -47,8 +47,7 @@ namespace MinimalAPI_Multas.Configurations
                         {
                             Name = "MinimalAPI_Reconocimiento - License - MIT",
                             Url = new Uri("https://opensource.org/licenses/MIT")
-                        },
-                        TermsOfService = new Uri("https://github.com/stphnwlsh/cleanminimalapi")
+                        }
                     });
 
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

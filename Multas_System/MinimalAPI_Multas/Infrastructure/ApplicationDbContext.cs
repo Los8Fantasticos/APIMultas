@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using MinimalAPI_Multas.Models.ApplicationModel;
 using System.Reflection;
 
 namespace MinimalAPI_Multas.Infrastructure
@@ -14,6 +14,7 @@ namespace MinimalAPI_Multas.Infrastructure
         {
 
         }
+        public DbSet<MultaModel>? Multa { get; set; } = null!;
 
         //public ApplicationDbContext()
         //{
@@ -29,6 +30,16 @@ namespace MinimalAPI_Multas.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<MultaModel>(entity =>
+            {
+                entity.HasKey(e => e.IdMulta);
+                entity.Property(e => e.Patente).HasMaxLength(10).HasColumnName("nvarchar").IsRequired();
+                entity.Property(e => e.Active).HasDefaultValue(true).IsRequired();
+                entity.Property(e => e.Fecha).HasDefaultValueSql("getdate()").IsRequired();
+                entity.Property(e => e.Monto).HasMaxLength(10).HasColumnName("nvarchar").IsRequired();
+            });
+
+
             base.OnModelCreating(modelBuilder);
             _ = modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
