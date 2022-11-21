@@ -33,10 +33,10 @@ namespace MinimalAPI_Multas.Infrastructure
             modelBuilder.Entity<MultaModel>(entity =>
             {
                 entity.HasKey(e => e.IdMulta);
-                entity.Property(e => e.Patente).HasMaxLength(10).HasColumnName("nvarchar").IsRequired();
+                entity.Property(e => e.Patente).HasMaxLength(10).HasColumnName("Patente").IsRequired();
                 entity.Property(e => e.Active).HasDefaultValue(true).IsRequired();
                 entity.Property(e => e.Fecha).HasDefaultValueSql("getdate()").IsRequired();
-                entity.Property(e => e.Monto).HasMaxLength(10).HasColumnName("nvarchar").IsRequired();
+                entity.Property(e => e.Monto).HasMaxLength(10).HasColumnName("Monto").IsRequired();
             });
 
 

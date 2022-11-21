@@ -1,4 +1,5 @@
 ﻿using MinimalAPI_Multas.Contracts.Repositories;
+using MinimalAPI_Multas.Models.ApplicationModel;
 
 namespace MinimalAPI_Multas.Infrastructure.Repositories
 {
@@ -10,5 +11,10 @@ namespace MinimalAPI_Multas.Infrastructure.Repositories
             _applicationDbContext = applicationDbContext;
         }
 
+        public async Task Insert(MultaModel multa)
+        {
+            _applicationDbContext?.Multa?.Add(multa);
+            await _applicationDbContext?.SaveChangesAsync();
+        }
     }
 }
