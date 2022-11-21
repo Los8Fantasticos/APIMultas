@@ -35,8 +35,8 @@ namespace MinimalAPI_Multas.Configurations
                     new OpenApiInfo
                     {
                         Version = "v1",
-                        Title = $"MinimalAPI_Reconocimiento - {ti.ToTitleCase(builder.Environment.EnvironmentName)} ",
-                        Description = "API reconocimiento para sistema de peaje",
+                        Title = $"MinimalAPI_Multas - {ti.ToTitleCase(builder.Environment.EnvironmentName)} ",
+                        Description = "API Multas para sistema de peaje",
                         Contact = new OpenApiContact
                         {
                             Name = "MinimalAPI_Reconocimiento",
@@ -45,7 +45,7 @@ namespace MinimalAPI_Multas.Configurations
                         },
                         License = new OpenApiLicense()
                         {
-                            Name = "MinimalAPI_Reconocimiento - License - MIT",
+                            Name = "MinimalAPI_Multas - License - MIT",
                             Url = new Uri("https://opensource.org/licenses/MIT")
                         }
                     });

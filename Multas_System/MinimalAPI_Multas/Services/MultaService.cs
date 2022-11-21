@@ -26,7 +26,7 @@ namespace MinimalAPI_Multas.Services
             
             await _multaRepository.Insert(multaModel);                        
 
-            logger.LogInformation("Patente multada.");
+            logger.LogInformation($"Patente {message} multada.");
         }
     }
 }
