@@ -2,6 +2,6 @@
 {
     public interface IMultaService
     {
-        
+        public Task<int> GetTotalMultasEmitidas();
     }
 }

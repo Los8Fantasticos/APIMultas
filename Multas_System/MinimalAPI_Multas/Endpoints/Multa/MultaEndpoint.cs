@@ -10,25 +10,24 @@ namespace MinimalAPI_Multas.Endpoints.Multa
     [ExcludeFromCodeCoverage]
     public class MultaEndpoint
     {
-        private readonly IMultaService _patenteService;
+        private readonly IMultaService _multaService;
         private readonly ILogger<MultaEndpoint> _logger;
         public MultaEndpoint(IMultaService multaService, ILoggerFactory logger)
         {
-            _patenteService = multaService;
+            _multaService = multaService;
             _logger = logger.CreateLogger<MultaEndpoint>();
         }
 
         public async Task MapMultaEndpoints(WebApplication app)
         {
-            _ = app.MapPost(
-               "/api/multa",
-               async (MultaModel multaModel) =>
+            _ = app.MapGet(
+               "/api/multas",
+               async () =>
                {
                    try
                    {
-                       multaModel.Active = true;
-                       _logger.LogInformation("test");
-                       string result = "asdasd";
+                       _logger.LogInformation("Se busca el total de multas realizadas");
+                       int result = await _multaService.GetTotalMultasEmitidas();
                        return result;
                    }
                    catch (Exception ex)

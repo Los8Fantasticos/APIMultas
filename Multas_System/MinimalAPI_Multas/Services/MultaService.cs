@@ -15,6 +15,9 @@ namespace MinimalAPI_Multas.Services
             _multaRepository = multaRepository;
             this.logger = logger;
         }
+
+        public Task<int> GetTotalMultasEmitidas() => _multaRepository.CountMultas();
+
         public async Task ReceiveAsync(string message, CancellationToken cancellationToken)
         {
             logger.LogInformation("Mensaje recibido para multar una patente");
