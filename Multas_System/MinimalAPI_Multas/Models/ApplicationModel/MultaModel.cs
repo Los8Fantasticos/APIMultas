@@ -4,8 +4,9 @@
     {
         public int IdMulta { get; set; }
         public string Patente { get; set; }
-        public string Monto { get; set; }
+        public int idPrecio { get; set; }
         public DateTime Fecha { get; set; }
         public bool Active { get; set; }
+        public PrecioModel Precio { get; set; }
     }
 }

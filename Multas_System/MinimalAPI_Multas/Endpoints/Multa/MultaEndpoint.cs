@@ -1,4 +1,5 @@
-﻿using MinimalAPI_Multas.Contracts.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using MinimalAPI_Multas.Contracts.Services;
 using MinimalAPI_Multas.Endpoints.Errors;
 using MinimalAPI_Multas.Models.ApplicationModel;
 using Swashbuckle.AspNetCore.Annotations;
@@ -43,6 +44,28 @@ namespace MinimalAPI_Multas.Endpoints.Multa
            .Produces<ApiError>(StatusCodes.Status404NotFound, contentType: MediaTypeNames.Application.Json)
            .Produces<ApiError>(StatusCodes.Status500InternalServerError, contentType: MediaTypeNames.Application.Json);
 
+            _ = app.MapPost(
+               "/api/multas/modificarPrecio",
+               async ([FromBody]int nuevoPrecio) =>
+               {
+                   try
+                   {
+                       _logger.LogInformation("Se busca el total de multas realizadas");
+                       int result = await _multaService.ModifyPrice(nuevoPrecio);
+                       return result;
+                   }
+                   catch (Exception ex)
+                   {
+                       _logger.LogError(ex, "Error en endpoint Multa.");
+                       throw;
+                   }
+               })
+           .WithTags("Multa")
+           .WithMetadata(new SwaggerOperationAttribute("..."))
+           .Produces<MultaModel>(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json)
+           .Produces<ApiError>(StatusCodes.Status400BadRequest, contentType: MediaTypeNames.Application.Json)
+           .Produces<ApiError>(StatusCodes.Status404NotFound, contentType: MediaTypeNames.Application.Json)
+           .Produces<ApiError>(StatusCodes.Status500InternalServerError, contentType: MediaTypeNames.Application.Json);
         }
     }
 }

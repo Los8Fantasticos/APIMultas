@@ -19,10 +19,23 @@ namespace MinimalAPI_Multas.Infrastructure.Repositories
             return multas;
         }
 
+        public async Task<int> GetLastPrice()
+        {
+            var precio = _applicationDbContext?.Precio?.LastOrDefault();
+            return precio.idPrecio;
+        }
+
         public async Task Insert(MultaModel multa)
         {
             _applicationDbContext?.Multa?.Add(multa);
             await _applicationDbContext?.SaveChangesAsync();
+        }
+
+        public async Task<int> InsertNewPrice(int monto)
+        {
+            _applicationDbContext?.Precio?.Add(new PrecioModel { Monto = monto });
+            await _applicationDbContext?.SaveChangesAsync();
+            return monto;
         }
     }
 }

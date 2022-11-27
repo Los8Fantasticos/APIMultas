@@ -18,6 +18,8 @@ namespace MinimalAPI_Multas.Services
 
         public Task<int> GetTotalMultasEmitidas() => _multaRepository.CountMultas();
 
+        public async Task<int> ModifyPrice(int nuevoPrecio) => await _multaRepository.InsertNewPrice(nuevoPrecio);
+
         public async Task ReceiveAsync(string message, CancellationToken cancellationToken)
         {
             logger.LogInformation("Mensaje recibido para multar una patente");
@@ -25,8 +27,8 @@ namespace MinimalAPI_Multas.Services
             MultaModel multaModel = new MultaModel();
             multaModel.Patente = message;
             //traer del settings el monto de la multa
-            multaModel.Monto = "1000";
-            
+            multaModel.idPrecio = await _multaRepository.GetLastPrice();
+
             await _multaRepository.Insert(multaModel);                        
 
             logger.LogInformation($"Patente {message} multada.");

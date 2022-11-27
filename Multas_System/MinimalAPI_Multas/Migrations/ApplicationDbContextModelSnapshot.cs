@@ -40,21 +40,49 @@ namespace MinimalAPI_Multas.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<string>("Monto")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("Monto");
-
                     b.Property<string>("Patente")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)")
                         .HasColumnName("Patente");
 
+                    b.Property<int>("idPrecio")
+                        .HasColumnType("int");
+
                     b.HasKey("IdMulta");
 
+                    b.HasIndex("idPrecio")
+                        .IsUnique();
+
                     b.ToTable("Multa");
+                });
+
+            modelBuilder.Entity("MinimalAPI_Multas.Models.ApplicationModel.PrecioModel", b =>
+                {
+                    b.Property<int>("idPrecio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPrecio"), 1L, 1);
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Monto");
+
+                    b.HasKey("idPrecio");
+
+                    b.ToTable("Precio");
+                });
+
+            modelBuilder.Entity("MinimalAPI_Multas.Models.ApplicationModel.MultaModel", b =>
+                {
+                    b.HasOne("MinimalAPI_Multas.Models.ApplicationModel.PrecioModel", "Precio")
+                        .WithOne()
+                        .HasForeignKey("MinimalAPI_Multas.Models.ApplicationModel.MultaModel", "idPrecio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Precio");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,5 +3,6 @@
     public interface IMultaService
     {
         public Task<int> GetTotalMultasEmitidas();
+        public Task<int> ModifyPrice(int nuevoPrecio);
     }
 }
