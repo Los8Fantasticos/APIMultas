@@ -39,7 +39,7 @@ namespace MinimalAPI_Multas.Endpoints.Multa
                })
            .WithTags("Multa")
            .WithMetadata(new SwaggerOperationAttribute("..."))
-           .Produces<MultaModel>(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json)
+           .Produces<int>(StatusCodes.Status200OK, contentType: MediaTypeNames.Application.Json)
            .Produces<ApiError>(StatusCodes.Status400BadRequest, contentType: MediaTypeNames.Application.Json)
            .Produces<ApiError>(StatusCodes.Status404NotFound, contentType: MediaTypeNames.Application.Json)
            .Produces<ApiError>(StatusCodes.Status500InternalServerError, contentType: MediaTypeNames.Application.Json);
