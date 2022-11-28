@@ -18,11 +18,11 @@ namespace MinimalAPI_Multas.Infrastructure.Repositories
             var multas = await _applicationDbContext.Multa.CountAsync();
             return multas;
         }
-
-        public async Task<int> GetLastPrice()
+        
+        public async Task<double> GetLastPrice()
         {
-            var precio = _applicationDbContext?.Precio?.LastOrDefault();
-            return precio.idPrecio;
+            var precio = (await _applicationDbContext.Precio.OrderByDescending(x => x.idPrecio).FirstOrDefaultAsync());
+            return precio.Monto;
         }
 
         public async Task Insert(MultaModel multa)

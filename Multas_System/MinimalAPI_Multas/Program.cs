@@ -73,7 +73,7 @@ void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         app.UseSwagger();
         app.UseSwaggerUI();
         var context = app.ApplicationServices.GetService<ApplicationDbContext>();
-        context?.Database?.Migrate();
+        //context?.Database?.Migrate();
     }
 
     app.UseHttpsRedirection();

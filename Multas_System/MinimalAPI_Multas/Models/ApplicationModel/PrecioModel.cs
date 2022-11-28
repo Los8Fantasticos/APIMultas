@@ -3,7 +3,6 @@
     public class PrecioModel
     {
         public int idPrecio { get; set; }
-        public decimal Monto { get; set; }
-        //public MultaModel Multas { get; set; }
+        public double Monto { get; set; }
     }
 }

@@ -22,16 +22,24 @@ namespace MinimalAPI_Multas.Services
 
         public async Task ReceiveAsync(string message, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Mensaje recibido para multar una patente");
-           
-            MultaModel multaModel = new MultaModel();
-            multaModel.Patente = message;
-            //traer del settings el monto de la multa
-            multaModel.idPrecio = await _multaRepository.GetLastPrice();
+            try
+            {
+                logger.LogInformation("Mensaje recibido para multar una patente");
 
-            await _multaRepository.Insert(multaModel);                        
+                MultaModel multaModel = new MultaModel();
+                multaModel.Patente = message;
+                //traer del settings el monto de la multa
+                multaModel.Monto = await _multaRepository.GetLastPrice();
 
-            logger.LogInformation($"Patente {message} multada.");
+                await _multaRepository.Insert(multaModel);
+
+                logger.LogInformation($"Patente {message} multada.");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

@@ -7,6 +7,6 @@ namespace MinimalAPI_Multas.Contracts.Repositories
         public Task Insert(MultaModel multa);
         public Task<int> CountMultas();
         public Task<int> InsertNewPrice(int multa);
-        public Task<int> GetLastPrice();
+        public Task<double> GetLastPrice();
     }
 }
